@@ -1,6 +1,6 @@
 #include "constants.h"
 #include "object.h"
-#include "point.cpp"
+#include "point.h"
 
 Object::Object()
 {
