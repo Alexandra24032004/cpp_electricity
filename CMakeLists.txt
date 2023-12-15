@@ -6,10 +6,10 @@ set(CMAKE_CXX_FLAGS "-O2")
 set(CMAKE_BUILD_TYPE Release)
 
 set(SOURCES
-	src/modeling.cpp
-	src/point.cpp
-	src/object.cpp
-	src/fields.cpp
+	modeling.cpp
+	point.cpp
+	object.cpp
+	fields.cpp
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES})
