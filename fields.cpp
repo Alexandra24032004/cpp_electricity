@@ -7,33 +7,22 @@
 #include "fields.h"
 
 
-void get_potential_field(std::vector<vector<double >>& scalar_field, Object object)
+void get_potential_field(std::vector<std::vector<double >>& scalar_field, std::vector<Object >& objects)
 {
-	std::ofstream out;
-	out.open(POTETNTIAL_FIELD_FILE);
-
 	for (int y = 0; y < FIELD_HEIGHT; y++)
 	{
 		for (int x = 0; x < FIELD_WIDTH; x++)
 		{
-			scalar_field[y][x] = object.get_potential_in_the_point(x, y);
-			scalar_field[y][x] = std::cout << std::setprecision(6) << object.get_potential_in_the_point(x, y) << ' ';
+			for(int i = 0; i < objects.size(); i++)
+			scalar_field[y][x] += objects[i].get_potential_in_the_point(x, y);
 		}
-
-		std::cout << '\n';
 	}
-
-	out.close();
 }
 
-void give_potential_field(Object object)
+void give_potential_field(std::vector<std::vector<double>>& scalar_field)
 {
-	std::vector<std::vector<double>> scalar_field(FIELD_HEIGHT, std::vector<double>(FIELD_WIDTH));
-
-	get_potential_field(scalar_field, object);
-
 	std::ofstream out;
-	out.open(POTETNTIAL_FIELD_FILE);
+	out.open(POTENTIAL_FIELD_FILE);
 
 	for (int y = 0; y < FIELD_HEIGHT; y++)
 	{
@@ -68,22 +57,16 @@ void get_vector_field(std::vector<std::vector<double >>& vector_field, std::vect
 	}
 }
 
-void give_vector_field(Object object)
+void give_vector_field(std::vector<std::vector<double >>& vector_field)
 {
-	std::vector<std::vector<double>> vector_field(FIELD_HEIGHT, std::vector<double>(2 * FIELD_WIDTH));
-	std::vector<std::vector<double>> scalar_field(FIELD_HEIGHT, std::vector<double>(FIELD_WIDTH));
-
-	//get_potential_field(scalar_field, object);
-	//get_vector
-
 	std::ofstream out;
-	out.open(POTETNTIAL_FIELD_FILE);
+	out.open(VECTOR_FIELD_FILE);
 
 	for (int y = 0; y < FIELD_HEIGHT; y++)
 	{
-		for (int x = 0; x < FIELD_WIDTH; x++)
+		for (int x = 0; x < 2 * FIELD_WIDTH; x++)
 		{
-			std::cout << std::setprecision(6) << scalar_field[y][x] << ' ';
+			std::cout << std::setprecision(6) << vector_field[y][x] << ' ';
 		}
 
 		std::cout << '\n';
