@@ -9,5 +9,6 @@ const int FIELD_WIDTH = 1000;
 const int FIELD_HEIGHT = 1000;
 const double ELECTRICAL_CONSTANT = 1.0;
 const std::string POTENTIAL_FIELD_FILE = "scalar_visualisation_data.txt";
+const std::string VECTOR_FIELD_FILE = "vector_visualisation_data.txt";
 
 #endif
