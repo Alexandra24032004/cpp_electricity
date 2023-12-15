@@ -2,8 +2,8 @@
 #include <iostream>
 #include <fstream>
 #include <iomanip>
-#include "point.cpp"
-#include "object.cpp"
+#include "point.h"
+#include "object.h"
 #include "fields.h"
 
 
