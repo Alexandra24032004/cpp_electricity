@@ -18,7 +18,7 @@ void Project::run()
     int num_of_active_string = -1;
     bool enter_is_pressed = 0;
     
-    sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Text Input");  
+    sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Text Input");
 
     sf::Font font;  // Объявляем переменную типа шрифт
     font.loadFromFile("arial.ttf");  // Загружаем шрифт с именем "arial.ttf"
@@ -29,7 +29,7 @@ void Project::run()
         texts[i].setFillColor(sf::Color::Black);  // Задаем цвет текста (черный)
         texts[i].setPosition(null_x, null_y + i * (width_of_bold + step));  // Задаем позицию текста на экране
     }
-
+    
 
     std::string input;  // Создаем пустую строку 
     string s1 = "";
@@ -128,6 +128,7 @@ void Project::run()
 
 
         }
+        
         window.clear(sf::Color::White);
         for (int i = 0; i < strings.size(); i++) {
             sf::RectangleShape rect(sf::Vector2f(500, 30));
@@ -148,4 +149,6 @@ void Project::run()
 
     return;  
 }
+
+
 

@@ -1,5 +1,6 @@
 #include "constants.h"
 #include "object.h"
+#include <SFML/Graphics.hpp>
 
 
 #ifndef PROJECT_H
