@@ -3,6 +3,8 @@
 #include "fields.h"
 #include "object.h"
 
+using namespace std;
+
 void tokenize(string const &str, const char delim, vector<string> &out)
 {
     /*
@@ -16,7 +18,7 @@ void tokenize(string const &str, const char delim, vector<string> &out)
     }
 }
 
-string fadeColor(string c1, string c2, double mix = 0) {
+string fadeColor(string c1, string c2, double mix) {
     /*
     creates gradient
     */
@@ -54,7 +56,7 @@ tuple<int, int, int> convertColor(const string& colorCode) {
 
     int red = stoi(redHex, nullptr, 16);
     int green = stoi(greenHex, nullptr, 16);
-    int blue = stoi(blueHex, nullptr, 1SHA6);
+    int blue = stoi(blueHex, nullptr, 16);
 
     return make_tuple(red, green, blue);
 }
@@ -69,6 +71,7 @@ vector<vector<vector<int>>> coloring(const vector<vector<double>>& arr, double m
         for (int y = 0; y < arr[0].size(); ++y) {
             if (arr[x][y] != NAN && arr[x][y] <= max_el) {
                 double mix = max_el != 0 ? static_cast<double>(arr[x][y]) / max_el : 0;
+                
                 string color1 = fadeColor(c1, c2, mix);
                 int r = stoi(color1.substr(1, 2), nullptr, 16);
                 int g = stoi(color1.substr(3, 2), nullptr, 16);
@@ -88,7 +91,7 @@ vector<vector<vector<int>>> coloring(const vector<vector<double>>& arr, double m
 }
 
 
-void display_scalar_field(const vector<vector<vector<int>>>& arr){
+void display_scalar_field(const vector<vector<vector<int>>>& arr, sf::RenderWindow& window){
   /*
     displays scalar field
   */
@@ -171,6 +174,7 @@ vector<Vec> get_vector_field_ff (vector<int> &body){
     for (int j = 0; j < num_of_vec; j++){
       double len_of_vec = pow((strings[i][2*j]*strings[i][2*j] + strings[i][2*j+1]*strings[i][2*j+1]), 0.5);
       double mix = len_of_vec/max_value;
+   
       string s = fadeColor(c1, c2, mix);  
       std::tuple<int, int, int> colorTuple = convertColor(s);
       int red, green, blue;
@@ -183,7 +187,7 @@ vector<Vec> get_vector_field_ff (vector<int> &body){
   return vectors;
 }
 
-void display_vector_field (vector<Vec> & vectors, vector<int> &body){
+void display_vector_field (vector<Vec> & vectors, vector<int> &body, sf::RenderWindow& window){
   /*
     displays vector field
   */
@@ -201,19 +205,19 @@ void display_vector_field (vector<Vec> & vectors, vector<int> &body){
 }
 
 
-void visualisation (vector<vector<double>> &scalar_field, bool is_scalar, vector<Object> &objects){
-        get_potential_field(std::vector<std::vector<double >> &scalar_field, std::vector<Object > &objects);
+void visualisation (vector<vector<double>> &scalar_field, bool is_scalar, vector<Object> &objects, sf::RenderWindow& window){
+        get_potential_field(scalar_field, objects);
         if (is_scalar){
-            give_potential_field(std::vector<std::vector<double >>& scalar_field);
+            give_potential_field(scalar_field);
             vector<vector<vector<int>>> col_arr = get_scalar_field_ff();
-            display_scalar_field(col_arr);
+            display_scalar_field(col_arr, window);
         }
         else {
             vector<vector<double>> vector_field(FIELD_HEIGHT, vector<double>(FIELD_WIDTH, 0));
-            get_vector_field(std::vector<std::vector<double >>& vector_field, std::vector<std::vector<double >>& scalar_field);
-            give_vector_field(std::vector<std::vector<double >>& vector_field);
+            get_vector_field(vector_field, scalar_field);
+            give_vector_field(vector_field);
             vector<int> body;
-            vector<Vec> vectors = get_vector_field(body);
-            display_vector_field (vectors, body);
+            vector<Vec> vectors = get_vector_field_ff(body);
+            display_vector_field (vectors, body, window);
         }
 }
