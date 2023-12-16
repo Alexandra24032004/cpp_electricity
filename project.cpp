@@ -80,6 +80,9 @@ Project::run()
                         Object new_object(scalar_field, strings, event.mouseButton.x, event.mouseButton.y, is_scalar);
                         objects.push_back(new_object);
 
+
+                        visualisation(scalar_field, is_scalar, objects);
+
                         enter_is_pressed = 0;
                     }
                 }
