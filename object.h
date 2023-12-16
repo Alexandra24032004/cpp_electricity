@@ -14,7 +14,7 @@ private:
 
 public:
 
-	Object(std::vector<std::vector<double >>& scalar_field, std::vector<std::string>& strings, int x, int y, bool is_scalar);
+	Object(std::vector<std::string>& strings, int x, int y);
 
 	double get_potential_in_the_point(int _x, int _y);
 };
