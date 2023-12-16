@@ -18,7 +18,3 @@ add_executable(${PROJECT_NAME} ${SOURCES})
 
 find_package(SFML 2.5 COMPONENTS graphics window system REQUIRED)
 target_link_libraries(${PROJECT_NAME} sfml-graphics sfml-window sfml-system)
-
-
-find_package(symengine REQUIRED)
-target_link_libraries(${PROJECT_NAME} symengine::symengine)
