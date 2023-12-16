@@ -1,6 +1,7 @@
 #include "constants.h"
 #include "object.h"
 #include "visual.h"
+#include "project.h"
 #include <SFML/Graphics.hpp>  // Подключаем заголовочный файл для работы с графикой
 #include <string>
 #include <iostream>
@@ -8,7 +9,7 @@
 
 using namespace std;
 
-Project::run()
+void Project::run()
 {
     vector<string> strings {"", "", "", "", ""};
     vector<string> inputs {"", "", "", "", ""};
@@ -17,7 +18,7 @@ Project::run()
     int num_of_active_string = -1;
     bool enter_is_pressed = 0;
     
-    sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Text Input");  // Создаём окно размером 800x600 пикселей и называем его "Text Input"
+    sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Text Input");  
 
     sf::Font font;  // Объявляем переменную типа шрифт
     font.loadFromFile("arial.ttf");  // Загружаем шрифт с именем "arial.ttf"
@@ -77,11 +78,11 @@ Project::run()
 
                     if ((event.mouseButton.x > (length_of_bold + 2 * null_x)) && enter_is_pressed)
                     {
-                        Object new_object(scalar_field, strings, event.mouseButton.x, event.mouseButton.y, is_scalar);
+                        Object new_object(strings, event.mouseButton.x, event.mouseButton.y);
                         objects.push_back(new_object);
 
 
-                        visualisation(scalar_field, is_scalar, objects);
+                        visualisation(scalar_field, is_scalar, objects, window);
 
                         enter_is_pressed = 0;
                     }
@@ -120,7 +121,7 @@ Project::run()
                 {
                     is_scalar = !is_scalar;
 
-                    visualisation(scalar_field, is_scalar, objects);
+                    visualisation(scalar_field, is_scalar, objects, window);
 
                 }
             }
@@ -142,9 +143,9 @@ Project::run()
         }
 
         window.display();   // Обновляем экран
-        //cout << s;
+    
     }
 
-    return 0;  // Возвращаем 0 и завершаем программу
+    return;  
 }
 
