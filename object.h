@@ -11,12 +11,10 @@ private:
 	std::vector<Point> points_array;
 	int shift_x = 0;
 	int shift_y = 0;
-	int priority = 1;
-	//Formula formula;
 
 public:
 
-	Object();
+	Object(std::vector<std::vector<double >>& scalar_field, std::vector<std::string>& strings, int x, int y, bool is_scalar);
 
 	double get_potential_in_the_point(int _x, int _y);
 };
