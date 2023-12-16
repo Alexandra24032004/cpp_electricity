@@ -1,5 +1,6 @@
 #include "constants.h"
 #include "object.h"
+#include "visual.h"
 #include <SFML/Graphics.hpp>  // Подключаем заголовочный файл для работы с графикой
 #include <string>
 #include <iostream>
@@ -116,7 +117,7 @@ Project::run()
                 {
                     is_scalar = !is_scalar;
 
-                    visualize(scalar_field, is_scalar);
+                    visualisation(scalar_field, is_scalar, objects);
 
                 }
             }
