@@ -21,20 +21,19 @@ void get_potential_field(std::vector<std::vector<double >>& scalar_field, std::v
 
 void give_potential_field(std::vector<std::vector<double>>& scalar_field)
 {
-	std::ofstream out;
-	out.open(POTENTIAL_FIELD_FILE);
+	std::ofstream outFile(POTENTIAL_FIELD_FILE);
 
 	for (int y = 0; y < FIELD_HEIGHT; y++)
 	{
 		for (int x = 0; x < FIELD_WIDTH; x++)
 		{
-			std::cout << std::setprecision(6) << scalar_field[y][x] << ' ';
+			outFile << std::setprecision(6) << scalar_field[y][x] << ' ';
 		}
 
-		std::cout << '\n';
+		outFile << '\n';
 	}
 
-	out.close();
+	outFile.close();
 }
 
 void get_vector_field(std::vector<std::vector<double >>& vector_field, std::vector<std::vector<double >>& scalar_field)
