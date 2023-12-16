@@ -2,7 +2,6 @@
 #include "object.h"
 #include "point.h"
 #include "parse.h"
-#include <symengine/symbol.h>
 
 
 Object::Object(std::vector<std::string>& strings, int _x, int _y)
