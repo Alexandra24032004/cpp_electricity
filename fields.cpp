@@ -15,6 +15,7 @@ void get_potential_field(std::vector<std::vector<double >>& scalar_field, std::v
 		{
 			for(int i = 0; i < objects.size(); i++)
 			scalar_field[y][x] += objects[i].get_potential_in_the_point(x, y);
+		        //std::cout << "++";
 		}
 	}
 }
@@ -27,7 +28,9 @@ void give_potential_field(std::vector<std::vector<double>>& scalar_field)
 	{
 		for (int x = 0; x < FIELD_WIDTH; x++)
 		{
-			outFile << std::setprecision(6) << scalar_field[y][x] << ' ';
+			std::cout << scalar_field[y][x] << "\n";
+			//outFile << std::setprecision(6) << scalar_field[y][x] << ' ';
+			outFile << scalar_field[y][x] << ' ';
 		}
 
 		outFile << '\n';
@@ -59,18 +62,17 @@ void get_vector_field(std::vector<std::vector<double >>& vector_field, std::vect
 void give_vector_field(std::vector<std::vector<double >>& vector_field)
 {
 
-	std::ofstream out;
-	out.open(VECTOR_FIELD_FILE);
+	std::ofstream outFile(VECTOR_FIELD_FILE);
 
 	for (int y = 0; y < FIELD_HEIGHT; y++)
 	{
 		for (int x = 0; x < 2 * FIELD_WIDTH; x++)
 		{
-			std::cout << std::setprecision(6) << vector_field[y][x] << ' ';
+			outFile << vector_field[y][x] << ' ';
 		}
 
-		std::cout << '\n';
+		outFile << '\n';
 	}
 
-	out.close();
+	outFile.close();
 }
