@@ -4,7 +4,7 @@
 для запуска проекта необходима библиотека SFML, которую можно установить командой sudo apt-get install libsfml-dev
 сборка происходит с помощью утилиты cmake, так что cmake должен быть установлен: sudo apt-get install cmake
 в терминале переходим в папку (пишем cd <путь к папке>), в которой хотим оставить проект
-пишем: git clone git@github.com:Shulliikkk/sph-toy-star.git
+пишем: git clone github.com/Alexandra24032004/cpp_electricity
 cd sph-toy-star
 cmake -S. -B build -- эта команда запустит cmake и скажет ему, где расположен сам проект и в какой папке его собирать
 cmake --build build -- собираем проект
