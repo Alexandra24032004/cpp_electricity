@@ -1,5 +1,7 @@
 #include "visual.h"
 #include "Vec.h"
+#include "fields.h"
+#include "object.h"
 
 void tokenize(string const &str, const char delim, vector<string> &out)
 {
