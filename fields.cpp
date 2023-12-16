@@ -21,8 +21,6 @@ void get_potential_field(std::vector<std::vector<double >>& scalar_field, std::v
 
 void give_potential_field(std::vector<std::vector<double>>& scalar_field)
 {
-	std::cout << "4556";
-	return ;
 	std::ofstream out;
 	out.open(POTENTIAL_FIELD_FILE);
 
@@ -61,8 +59,6 @@ void get_vector_field(std::vector<std::vector<double >>& vector_field, std::vect
 
 void give_vector_field(std::vector<std::vector<double >>& vector_field)
 {
-	std::cout << "4556";
-	return ;
 
 	std::ofstream out;
 	out.open(VECTOR_FIELD_FILE);
