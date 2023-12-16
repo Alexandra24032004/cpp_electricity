@@ -12,6 +12,8 @@ set(SOURCES
 	visual.cpp
 	project.cpp
 	parse.cpp
+	modeling.cpp
+	Vec.cpp
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES})
