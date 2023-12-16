@@ -15,5 +15,12 @@ const int widht_of_bold = 30;
 const int step = 30;
 int const null_x = 50;
 int const null_y = 50;
+const int shape_of_area = 1000;
+const int shape_of_grid = 20;
+const int num_of_vec = shape_of_area/shape_of_grid;
+const string c1 = "#0000FF"; //blue
+const string c2 = "#FFFF00"; //yellow
+const string c3 = "#EE82EE"; //purple
+const string c4 = "#00FFFF"; //light blue
 
 #endif
