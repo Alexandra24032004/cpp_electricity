@@ -130,7 +130,7 @@ vector<vector<vector<int>>> get_scalar_field_ff (){
         }
   }
   in.close();
-  vector<vector<vector<int>>> col_arr = coloring(strings, max_value, c3, c4);
+  vector<vector<vector<int>>> col_arr = coloring(strings, 15, c3, c4);
   return col_arr;
 }
 
