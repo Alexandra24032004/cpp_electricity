@@ -5,7 +5,7 @@
 #include <symengine/symbol.h>
 
 
-Object::Object(std::vector<std::vector<double >>& scalar_field, std::vector<std::string>& strings, int _x, int _y, bool is_scalar)
+Object::Object(std::vector<std::string>& strings, int _x, int _y)
 {
 	shift_x = _x;
 	shift_y = _y;
@@ -20,8 +20,6 @@ Object::Object(std::vector<std::vector<double >>& scalar_field, std::vector<std:
 			}
 		}
 	}
-
-	visualize(scalar_field, is_scalar);
 }
 
 double Object::get_potential_in_the_point(int _x, int _y)
