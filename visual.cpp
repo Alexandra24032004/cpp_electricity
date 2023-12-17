@@ -100,7 +100,7 @@ void display_scalar_field(const vector<vector<vector<int>>>& arr, sf::RenderWind
     for (int i = 0; i < FIELD_WIDTH; i++) {
         for (int j = 0; j < FIELD_WIDTH; j++) {
           rectangle.setFillColor(sf::Color(arr[i][j][0], arr[i][j][1], arr[i][j][2]));
-          rectangle.setPosition(2*null_x+length_of_bold+i, j);
+          rectangle.setPosition(2*null_x+length_of_bold+j, i);
           window.draw(rectangle);
         }
     }
@@ -116,6 +116,7 @@ vector<vector<vector<int>>> get_scalar_field_ff (){
  
   vector<vector<double>> strings;
   ifstream in(POTENTIAL_FIELD_FILE);
+  //std::cout << max_value;
   if (in.is_open()) {
     while (getline(in, line))
       {
@@ -124,13 +125,15 @@ vector<vector<vector<int>>> get_scalar_field_ff (){
         tokenize(line, ' ', out);
         for (int i=0; i<FIELD_WIDTH; i++){
           string.push_back(stod(out[i]));
-          if (stod(out[i]) > max_value) max_value = stod(out[i]);
+          if ((stod(out[i]) > max_value)&&(!std::isinf(stod(out[i])))) {max_value = stod(out[i]); }//std::cout << max_value;}
+
         }
         strings.push_back(string);
         }
   }
   in.close();
-  vector<vector<vector<int>>> col_arr = coloring(strings, 15, c3, c4);
+  //std::cout << max_value;
+  vector<vector<vector<int>>> col_arr = coloring(strings, max_value, c3, c4);
   return col_arr;
 }
 
@@ -138,6 +141,7 @@ vector<Vec> get_vector_field_ff (vector<int> &body){
   /*
     get vector field from file
   */
+  //std::cout << "start_vec";
   double max_value = 0;
   string line;
   vector<vector<double>> strings;
@@ -147,28 +151,30 @@ vector<Vec> get_vector_field_ff (vector<int> &body){
     while (std::getline(in, line))
       {
         vector<std::string> out;
-        vector<double> string;
+        vector<double> string {};
         tokenize(line, ' ', out);
         for (int i=0; i<FIELD_WIDTH*2; i++){
-          if (isnan(stod(out[i]))){
-            body.push_back(i);
+          if (isnan(stod(out[i]))&&(i%2==0)){
+            body.push_back(i/2);
             body.push_back(j);
           }
           else{
-            if (i%(shape_of_grid*2)==0) {
+            if ((i%(shape_of_grid*2))==0) {
               string.push_back(stod(out[i]));
               string.push_back(stod(out[i+1]));
-              double len = pow((string[i]*string[i] + string[i+1]*string[i+1]), 0.5);
-              if (len > max_value) max_value = len;
+              double len = pow(((stod(out[i]))*(stod(out[i])) + (stod(out[i+1]))*(stod(out[i+1]))), 0.5);
+
+              if ((len > max_value)&&(!isinf(len))) max_value = len;
             }
           }
         }
-        strings.push_back(string);
+        if ((j%shape_of_grid)==0) strings.push_back(string);
         j+=1;
         }
   }
   in.close();
-
+ //std::cout << strings[0].size();
+ std::cout << max_value;
   std::vector<Vec> vectors;
   for (int i = 0; i < num_of_vec; i++) {
     for (int j = 0; j < num_of_vec; j++){
@@ -180,8 +186,8 @@ vector<Vec> get_vector_field_ff (vector<int> &body){
       int red, green, blue;
       std::tie(red, green, blue) = colorTuple;
       sf::Color color(red, green, blue);
-      double k = shape_of_grid/max_value;
-      Vec vec(2*null_x+length_of_bold+shape_of_grid*i, shape_of_grid*j, strings[i][2*j]*k, strings[i][2*j+1]*k, color);
+      double k = (shape_of_grid*1.41)/max_value;
+      Vec vec(2*null_x+length_of_bold+shape_of_grid*j, shape_of_grid*i, strings[i][2*j]*k, strings[i][2*j+1]*k, color);
       vectors.push_back(vec);}
   }
   return vectors;
@@ -213,8 +219,11 @@ void visualisation (vector<vector<double>> &scalar_field, bool is_scalar, vector
             display_scalar_field(col_arr, window);
         }
         else {
-            vector<vector<double>> vector_field(FIELD_HEIGHT, vector<double>(FIELD_WIDTH, 0));
+            window.clear(sf::Color::Black);
+            //std::cout << "vec1";
+            vector<vector<double>> vector_field(FIELD_HEIGHT, vector<double>(2*FIELD_WIDTH, 0));
             get_vector_field(vector_field, scalar_field);
+            //std::cout << "vec3";
             give_vector_field(vector_field);
             vector<int> body;
             vector<Vec> vectors = get_vector_field_ff(body);
