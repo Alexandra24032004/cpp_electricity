@@ -78,7 +78,7 @@ void Project::run()
 
                     if ((event.mouseButton.x > (length_of_bold + 2 * null_x)) && enter_is_pressed)
                     {
-                        Object new_object(strings, event.mouseButton.x, event.mouseButton.y);
+                        Object new_object(strings, event.mouseButton.x-length_of_bold - 2 * null_x, event.mouseButton.y);
                         objects.push_back(new_object);
 
 
@@ -95,7 +95,6 @@ void Project::run()
                 if (event.key.code == sf::Keyboard::Enter)
                 {
                     num_of_active_string = -1;
-                    cout << "enter\n";
 
                     for (int i = 0; i < strings.size(); i++) {
                         strings[i] = inputs[i];
@@ -119,6 +118,7 @@ void Project::run()
                 }
                 if ((event.key.code == sf::Keyboard::Space) && (num_of_active_string == -1))
                 {
+                    //std::cout << "vec2";
                     is_scalar = !is_scalar;
 
                     visualisation(scalar_field, is_scalar, objects, window);
@@ -129,7 +129,7 @@ void Project::run()
 
         }
         
-        window.clear(sf::Color::White);
+        //window.clear(sf::Color::White);
         for (int i = 0; i < strings.size(); i++) {
             sf::RectangleShape rect(sf::Vector2f(500, 30));
             rect.setOutlineThickness(5);
@@ -141,6 +141,7 @@ void Project::run()
             if (inputs[i] != "") {
                 window.draw(texts[i]);
             }
+            //visualisation(scalar_field, is_scalar, objects, window);
         }
 
         window.display();   // Обновляем экран

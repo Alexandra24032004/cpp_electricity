@@ -13,7 +13,7 @@ Object::Object(std::vector<std::string>& strings, int _x, int _y)
 	{
 		for (int x = 0; x < FIELD_WIDTH; x++)
 		{
-			if (calc_all_expressions(strings, shift_x - x, shift_y - y))
+			if (calc_all_expressions(strings, x - shift_x, y - shift_y))
 			{
 				points_array.push_back(Point(x, y));
 			}

@@ -19,7 +19,7 @@ const int shape_of_grid = 20;
 const int num_of_vec = FIELD_WIDTH / shape_of_grid;
 const std::string c1 = "#0000FF"; //blue
 const std::string c2 = "#FFFF00"; //yellow
-const std::string c3 = "#EE82EE"; //purple
-const std::string c4 = "#00FFFF"; //light blue
+const std::string c4 = "#EE82EE"; //purple
+const std::string c3 = "#00FFFF"; //light blue
 
 #endif
